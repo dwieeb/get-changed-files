@@ -75,8 +75,8 @@ Consider using one of the other formats if that's the case.
 Make sure to do the following before checking in any code changes.
 
 ```bash
-$ yarn
-$ yarn all
+$ npm i
+$ npm run all
 ```
 
 # License
