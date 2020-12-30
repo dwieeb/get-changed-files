@@ -36,6 +36,18 @@ async function run(): Promise<void> {
       case 'push':
         base = context.payload.before;
         head = context.payload.after;
+
+        // if we don't know the base, make an assumption
+        if (base === '0000000000000000000000000000000000000000') {
+          const { data: commits } = await client.repos.listCommits({
+            sha: head,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          });
+
+          base = commits[1].sha;
+        }
+
         break;
       default:
         core.setFailed(

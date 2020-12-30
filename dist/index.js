@@ -2053,6 +2053,15 @@ function run() {
                 case 'push':
                     base = github_1.context.payload.before;
                     head = github_1.context.payload.after;
+                    // if we don't know the base, make an assumption
+                    if (base === '0000000000000000000000000000000000000000') {
+                        const { data: commits } = yield client.repos.listCommits({
+                            sha: head,
+                            owner: github_1.context.repo.owner,
+                            repo: github_1.context.repo.repo,
+                        });
+                        base = commits[1].sha;
+                    }
                     break;
                 default:
                     core.setFailed(`This action only supports pull requests and pushes, ${github_1.context.eventName} events are not supported. ` +
