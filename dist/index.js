@@ -2075,7 +2075,7 @@ function run() {
                 base,
                 head,
                 owner: github_1.context.repo.owner,
-                repo: github_1.context.repo.repo
+                repo: github_1.context.repo.repo,
             });
             // Ensure that the request was successful.
             if (response.status !== 200) {
